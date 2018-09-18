@@ -1,0 +1,44 @@
+//Recibe un arreglo de 10 numeros y regresa un puntero al mayor y un puntero al menor
+#include <iostream>
+
+using namespace std;
+
+void Generar_Arreglo(int *Arreglo, int Size){
+    cout << "ingrese 10 Numeros" << endl;
+    for(int i(0);i<Size;i++){
+        cin >> Arreglo[i];
+    }
+}
+int* Seleccion_mayor(int *Arreglo, int Size){
+    int mayor(0),Ind(0);
+    for(int i(0);i<Size;++i){
+        if(Arreglo[i] > mayor){
+            mayor = Arreglo[i];
+        Ind = i;
+        }
+     }
+    return &Arreglo[Ind];
+}
+
+int* Seleccion_menor(int *Arreglo, int Size,int menor){
+    int Ind(0);
+    for(int i(0);i<Size;++i){
+         if(Arreglo[i] < menor){
+            menor = Arreglo[i];
+        Ind = i;
+        }
+     }
+    return &Arreglo[Ind];
+}
+
+int main(){
+    int const Size(10);
+    int Arreglo[Size];
+    int *ptr_mayor;
+    int *ptr_menor;
+   Generar_Arreglo(Arreglo, Size);
+    ptr_mayor = Seleccion_mayor(Arreglo,Size);
+    cout << ptr_mayor << endl << *ptr_mayor << endl;
+    ptr_menor = Seleccion_menor(Arreglo,Size,*ptr_mayor);
+    cout << ptr_menor << endl << *ptr_menor << endl;
+}
