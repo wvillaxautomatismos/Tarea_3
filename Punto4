@@ -1,0 +1,33 @@
+//Recibe un arreglo de 10 numeros y realiza swap soble el mismo arreglo
+#include <iostream>
+
+using namespace std;
+
+void Generar_Arreglo(int *Arreglo, int Size){
+    cout << "ingrese 10 Numeros" << endl;
+    for(int i(0);i<Size;i++){
+        cin >> Arreglo[i];
+    }
+}
+ void swap(int *Arreglo, int Size){
+     int temp(0);
+    for(int i(0),d(Size-1);i<d;++i,d--){
+        temp = Arreglo[d];
+        Arreglo[d]=Arreglo[i];
+        Arreglo[i] = temp;
+     }
+}
+
+ void Mostar_arreglo(int *Arreglo, int Size){
+     cout << endl;
+     for(int i(0);i<Size;i++)
+         cout << Arreglo[i] << endl;
+ }
+
+int main(){
+    int const Size(10);
+    int Arreglo[Size];
+    Generar_Arreglo(Arreglo, Size);
+   swap(Arreglo,Size);
+   Mostar_arreglo(Arreglo,Size);
+}
