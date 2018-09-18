@@ -1,0 +1,38 @@
+//Calcula la desviacion estandar de 100 numeros aleatorios entre -1.0 y 1.0
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <cmath>
+using namespace std;
+
+void Generar_Arreglo(float *Arreglo, int Size){
+    srand(static_cast<unsigned>( time(nullptr)));
+    for(int i(0);i<Size;i++){
+        Arreglo[i] = ((rand() % 21) -10)/10.0;
+    cout << Arreglo[i] << endl;
+    }
+}
+float Calcular_Promedio(float *Arreglo, int Size){
+    float suma(0.0);
+    for(int i(0);i<Size;++i){
+        suma += Arreglo[i];
+    }
+    return suma/Size;
+}
+
+float SD(float *Arreglo, int Size, float Avg){
+    float sumatoria(0);
+    for(int i(0);i<Size;++i){
+        sumatoria += ((Arreglo[i]-Avg)*(Arreglo[i]-Avg));
+    }
+    return sqrt(sumatoria/Size);
+}
+
+int main(){
+    int const Size(100);
+    float Promedio,Arreglo[Size];
+   Generar_Arreglo(Arreglo, Size);
+    Promedio = Calcular_Promedio(Arreglo,Size);
+    cout << "La desviacion estandar de los numeros aleatorios es: \n";
+    cout << SD(Arreglo, Size, Promedio) << endl;
+}
