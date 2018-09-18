@@ -1,0 +1,92 @@
+// Traductor a codigo morse
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+void Cargar_Abecedario(char *Letra,int longitud){       //Carga el abecedario apartir de su codigo ascii
+    for(int i(0);i<=longitud;i++){
+        Letra[i] =char(65 + i);
+    }
+}
+
+string Convertir_a_Morse(char *Letras,char Morse[26][4],int longitud,string Mensaje){  //convierte los carecteres de entrada a Morse
+    string Cod_Morse;
+    int i(0),d(0);
+    for(int c:Mensaje){
+        if (c != ' '){
+            i=0;
+            d=0;
+            do{
+                if(c == Letras[i]){
+                   for (int a(0);a<=3;a++){
+                       if (Morse[i][a] != ' ')
+                           Cod_Morse = Cod_Morse + (Morse[i][a]);
+                   }
+                }
+                d = i;
+                i++;
+             }while(c != Letras[d] or i == longitud);
+        }
+        else
+            Cod_Morse = Cod_Morse + "/";
+        Cod_Morse = Cod_Morse + " ";
+    }
+    return Cod_Morse;
+}
+
+
+string convertir_a_Mayus(string Mayus){     //Convierte los caracteres a mayusculas y filtra los caracteres diferentes de alfabetico.
+    string Mensaje;
+            for(char c : Mayus){
+               if((c >= 65) and (c<= 90))
+                  Mensaje = Mensaje + c;
+               else if((c >= 97) and (c<= 122)){
+                  c = c-32;
+                  Mensaje = Mensaje + c;
+                }
+               else if(c == ' ')
+                  Mensaje = Mensaje + c;
+            }
+    return Mensaje;
+
+}
+
+int main(){
+    char abc[26];
+    char morse[26][4]=
+    {
+        {'.','-',' ',' '},  //A
+        {'-','.','.','.'},  //B
+        {'-','.','-','.'},  //C
+        {'-','.','.',' '},  //D
+        {'.',' ',' ',' '},  //E
+        {'.','.','-','.'},  //F
+        {'-','-','.',' '},  //G
+        {'.','.','.','.'},  //H
+        {'.','.',' ',' '},  //I
+        {'.','-','-','-'},  //J
+        {'-','.','-',' '},  //K
+        {'.','-','.','.'},  //L
+        {'-','-',' ',' '},  //M
+        {'-','.',' ',' '},  //N
+        {'-','-','-',' '},  //O
+        {'.','-','-','.'},  //P
+        {'-','-','.','-'},  //Q
+        {'.','-','.',' '},  //R
+        {'.','.','.',' '},  //S
+        {'-',' ',' ',' '},  //T
+        {'.','.','-',' '},  //U
+        {'.','.','.','-'},  //V
+        {'.','-','-',' '},  //W
+        {'-','.','.','-'},  //X
+        {'-','.','-','-'},  //Y
+        {'-','-','.','.'},  //Z
+      };
+    string Mes_in,M_Mayus;
+    Cargar_Abecedario(abc, 26);
+    cout << "Traductor a codigo Morse \n ingrese una frase para ser convertida a morse \n\n";
+    getline(cin, Mes_in);
+    M_Mayus = convertir_a_Mayus(Mes_in);
+    cout << Convertir_a_Morse(abc,morse,26,M_Mayus) << endl;
+}
