@@ -1,0 +1,63 @@
+//
+#include <iostream>
+
+using namespace std;
+int const Size(4);
+void Generar_Arreglo(int Arreglo[4][4], int Size){
+    cout << "Ingrese 16 Numeros para formar una matriz 4x4" << endl;
+    for(int i(0);i<Size;i++){
+        cout << "Ingrese los valores de la fila " << i << endl;
+        for(int a(0);a<Size;a++){
+            cin >> Arreglo[i][a];
+        }
+    }
+}
+ void imprimir_Arreglo(int Arreglo[4][4], int Size){
+    for(int i(0);i<Size;i++){
+         cout  << endl << "\t\t" ;
+         for(int a(0);a<Size;a++){
+             cout << Arreglo[i][a] << "\t";
+         }
+     }
+    cout << endl;
+}
+ void imprimir_Arreglo_2(int Arreglo[16][16], int Size){
+    for(int i(0);i<Size;i++){
+         cout  << endl ;
+         for(int a(0);a<Size;a++){
+             cout << Arreglo[i][a] << "\t";
+         }
+     }
+    cout << endl;
+}
+
+ void Producto_Hamadard(int Arreglo_1[Size][Size],int Arreglo_2[Size][Size],int Arreglo_3[Size*Size][Size*Size],int Size){
+     int d(0),f(0);
+     for(int i(1);i<=Size;i++){
+         for(int a(1);a<=Size;a++){
+             f=0;
+             for(int b(1);b<=Size;b++){
+                 for(int c(1);c<=Size;c++){
+                     Arreglo_3[d+a-1][f+c-1]=Arreglo_1[a-1][b-1] * Arreglo_2[i-1][c-1];
+                 }
+               f += 4;
+             }
+         }
+         d +=4;
+     }
+ }
+
+
+int main(){
+    int Arreglo_1[Size][Size];
+    int Arreglo_2[Size][Size];
+    int Arreglo_3[Size*Size][Size*Size];
+    Generar_Arreglo(Arreglo_1, Size);
+    Generar_Arreglo(Arreglo_2, Size);
+     cout << "la matriz 1 quedo formada de la siguiente forma:" << endl;
+    imprimir_Arreglo(Arreglo_1,Size);
+     cout << "la matriz 2 quedo formada de la siguiente forma:" << endl;
+    imprimir_Arreglo(Arreglo_2,Size);
+    Producto_Hamadard(Arreglo_1, Arreglo_2, Arreglo_3,Size);
+    imprimir_Arreglo_2(Arreglo_3,Size*Size);
+}
